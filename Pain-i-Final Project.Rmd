@@ -1,0 +1,283 @@
+---
+title: "Lab Name"
+author: "Author Name"
+date: "`r Sys.Date()`"
+output: openintro::lab_report
+---
+
+```{r load-packages, message=FALSE}
+library(tidyverse)
+library(openintro)
+library(googlesheets4)
+library(dplyr)
+```
+
+### Exercise 1
+
+Insert any text here.
+
+```{r code-chunk-label}
+# Insert code for Exercise 1  ://docs.google.com/spreadsheets/d/1cQqU82-WqCelCeKXR3wtYboCiGPkDmj9_G5yR1mythE/edit?usp=sharing
+sheet_url<-"https://docs.google.com/spreadsheets/d/1cQqU82-WqCelCeKXR3wtYboCiGPkDmj9_G5yR1mythE/edit?usp=sharing"
+uk_diagnosis_after_diabetes<- read_sheet(sheet_url)
+head(uk_diagnosis_after_diabetes)
+sheet_urls<-"https://docs.google.com/spreadsheets/d/1JaWZP0BI8Wrvf3J4w3j-tmtdIc7BQn3U9hkc5htLFbU/edit?gid=750954689#gid=750954689"
+ukgastational<- read_sheet(sheet_urls)
+head(ukgastational)
+sheet_url<-"https://docs.google.com/spreadsheets/d/17g8UXHUCyU1tCTt5jk4Ol_JUpDfkm_XZ271f6JpauBk/edit?gid=35895440#gid=35895440"
+uk_condition_after_diagnosis <- read_sheet(sheet_url)
+head(uk_condition_after_diagnosis)
+sheet_url<-"https://docs.google.com/spreadsheets/d/1zy-MjDVb3qEiCGDeFi3Wk3JbRGloXYrzvhBpkGdFgks/edit?usp=sharing"
+uk_demograph<- read_sheet(sheet_url)
+head(uk_demograph)
+
+```
+
+
+
+```{r code-chunk-label}
+sheet_url<-"https://docs.google.com/spreadsheets/d/1DrdE3rCPXZm6DUtrmhjNJnIY2FSpVnTeGSVT3tI7X3k/edit?usp=sharing"
+malaysia_demograph<- read_sheet(sheet_url)
+head(malaysia_demograph)
+sheet_url<-"https://docs.google.com/spreadsheets/d/1DrdE3rCPXZm6DUtrmhjNJnIY2FSpVnTeGSVT3tI7X3k/edit?usp=sharing"
+malaysia_risk_factor<- read_sheet(sheet_url)
+head(malaysia_risk_factor)
+sheet_url<-"https://docs.google.com/spreadsheets/d/13HPgM5r_yjitEts805cxyGEWvfQtkneNEm4qdRy1vB0/edit?gid=0#gid=0"
+malaysia_gastational<- read_sheet(sheet_url)
+head(malaysia_gastational)
+sheet_url<-"https://docs.google.com/spreadsheets/d/1McWV5bB22dQ7XHKdXupseV3FObMtG2KrMQsoy41NKcA/edit?gid=0#gid=0"
+malaysia_stroke<- read_sheet(sheet_url)
+head(malaysia_stroke)
+sheet_url<-"https://docs.google.com/spreadsheets/d/1LG287deVZDr-pJYb2Bf1hkuzF9OHEzWYEIYI0T-JJ8Y/edit?gid=0#gid=0"
+malaysia_factors_gastational<- read_sheet(sheet_url)
+head(malaysia_factors_gastational)
+sheet_url<-"https://docs.google.com/spreadsheets/d/17J-rCsJ398iIdmY-G_V9GKlfjO8PXQ7ujy-j3cXdHy8/edit?usp=sharing"
+malaysia_diabetic_bmi<- read_sheet(sheet_url)
+```
+
+
+```{r code-chunk-label}
+sheet_url<-"https://docs.google.com/spreadsheets/d/1-gBPpmAnl6i2hHkxoL1wg3-1mhijzqe8fbETBzOiDB0/edit?usp=sharing"
+global_air<- read_sheet(sheet_url)
+head(global_air)
+sheet_url<-"https://docs.google.com/spreadsheets/d/1unG52KhlURvzJIs-LOZQJCafY-iFiybRevL7dn7MbOg/edit?gid=1000439626#gid=1000439626"
+global_water_pollution<- read_sheet(sheet_url)
+head(global_water_pollution)
+sheet_url<-"https://docs.google.com/spreadsheets/d/1PvifqQtf5d71spETemhJoJJrb_w7h9gEHqFmN6a1lok/edit?usp=sharing"
+world_diabetic_indicators<- read_sheet(sheet_url)
+head(world_diabetic_indicators)
+
+```
+
+
+```{r code-chunk-label}
+# Your list of rows to keep
+rows_to_keep <- c(
+  "Single", "Married", "Divorced",
+  "Ischemic stroke",
+  "Normal weight", "Overweight", "Obese", "Underweight",
+  "Atrial fibrillation", "No atrial fibrillation",
+  "Alcohol intake", "No alcohol intake",
+  "Family History of Stroke", "No family history of stroke"
+)
+
+# Now filter based on the values in the "Category" column
+filtered_malaysia_stroke <- malaysia_stroke %>%
+  filter(Category %in% rows_to_keep)
+
+# View the result
+print(filtered_malaysia_stroke)
+
+
+
+
+```
+
+```{r}
+rows_to_keep <- c("Sex (females)","Age 60 years","Malay","Chinese","Indian","East Malaysians","Formal education","Smokers","Hypertension","Dyslipidemia","Ischemic Heart Disease","Atrial Fibrillation","Ischemic stroke","TIA","Recurrent Ischemic Stroke"
+  
+)
+filtered_malaysia_diabetic_bmi <- malaysia_diabetic_bmi %>%
+  filter(Characteristic %in% rows_to_keep)
+
+print(filtered_malaysia_diabetic_bmi)
+```
+
+```{r}
+rows_to_keep <- c("Ethnic Group","Malay","Chinese","Indian","East Malaysians","Formal Education","Duration of Hypertension (Years)","<1","1–5","6–10","6–10","Duration of Diabetes (Years)","<1","1–5","6–10",">10","T2DM before 1st stroke","Smoking")
+
+filtered_malaysia_demograph <- malaysia_demograph %>%
+  filter(Characteristic %in% rows_to_keep)
+
+print(filtered_malaysia_demograph)
+```
+```{r}
+rows_to_keep <- c("Age group","15–19","20–24","25–29","30–34","35–39","40–44","45–49","Ethnicity","Malays","Chinese","Indians","Other Bumiputera","BMI","Normal/ Underweight","Overweight","Overweight","Hypertension during pregnancy","Yes","No","Marital status","Single/ Divorcee/ Widower","Married","Locality","Urban","Rural")
+
+filtered_malaysia_factors_gastational <-malaysia_factors_gastational%>%
+  filter(Variable %in% rows_to_keep)
+
+print(filtered_malaysia_factors_gastational)
+
+```
+
+```{r}
+rows_to_keep <- c("Hypertension", "Stroke")
+
+filtered_uk_diagnosis_after_diabetes <- uk_diagnosis_after_diabetes %>%
+  filter(Timeperiod %in% rows_to_keep)
+
+print(filtered_uk_diagnosis_after_diabetes)
+
+uk_diagnosis_after_diabetes_clean <- filtered_uk_diagnosis_after_diabetes %>%
+  mutate(
+    AtIndex = unlist(AtIndex),
+    `2yearsafterdiagnosis` = unlist(`2yearsafterdiagnosis`),
+    `5yearsafterdiagnosis` = unlist(`5yearsafterdiagnosis`),
+    `10yearsafterdiagnosis` = unlist(`10yearsafterdiagnosis`)
+  )
+
+
+print(uk_diagnosis_after_diabetes_clean)
+```
+
+```{r}
+rows_to_keep <- c("Malaysia")
+
+malaysia_filtered_global_air <- global_air %>%
+  filter(Country %in% rows_to_keep)
+
+print(malaysia_filtered_global_air)
+
+```
+```{r}
+rows_to_keep <- c("United Kingdom of Great Britain and Northern Ireland")
+
+uk_filtered_global_air <- global_air %>%
+  filter(Country %in% rows_to_keep)
+
+print(uk_filtered_global_air)
+
+
+
+
+```
+
+```{r}
+
+rows_to_keep <- c("United Kingdom")
+
+ filtered_global_water_pollution<- global_water_pollution%>%
+  filter(Country %in% rows_to_keep)
+
+print(filtered_global_water_pollution)
+
+
+
+
+
+```
+```{r}
+
+rows_to_keep <- c("2")
+
+filtered_world_diabetic_indicators<- world_diabetic_indicators%>%
+  filter(Diabetes_012 %in% rows_to_keep)
+
+print(filtered_world_diabetic_indicators)
+
+
+
+
+```
+
+
+```{r}
+colnames(filtered_malaysia_factors_gastational)
+
+elongated_filtered <- filtered_malaysia_factors_gastational %>%
+  pivot_longer(
+    cols = c(`Crude OR\n[OR (95% CI)]`, `Adjusted OR\n[OR (95% CI )]`),
+    names_to = "SurveyYear",
+    values_to = "RawCount"
+  ) %>%
+  mutate(
+    Count = as.numeric(str_extract(RawCount, "^[0-9]+")),  # extract only the number before the space/parenthesis
+    AgeGroup = factor(Variable, levels = c("15–19", "20–24", "25–29", "30–34", "35–39", "40–44", "45–49"))
+  )
+
+
+
+ggplot(elongated_filtered, aes(x = Variable, y = Count, fill = SurveyYear)) +
+  geom_bar(stat = "identity", position = "dodge") +
+  labs(
+    title = "Age Group Distribution of Gestational Diabetes in Malaysia",
+    x = "Age Group", y = "Number of Cases"
+  ) +
+  theme_minimal()
+
+###
+```
+
+```{r}
+age_long <- pivot_longer(uk_demograph,
+                         cols = c("Mean Age (years)", "Median Age (years)"),
+                         names_to = "Metric",
+                         values_to ="Age")
+ggplot(age_long,aes(x = Year, y = Age, color = Metric))+
+  geom_line(size = 1.2) +
+  geom_point(size = 3) +
+  labs(title = "Mean and Median Age Over Time in the UK",
+       X = "Year", y = "Age (years)",
+       color = "Age Metric") +
+  theme_minimal()
+  
+###
+
+
+```
+
+```{r}
+# Function to extract numeric percentage
+extract_percent <- function(x) {
+  as.numeric(str_extract(x, "\\d+\\.*\\d*"))  # Gets numbers like 12 or 12.5
+}
+
+# Clean stroke data
+stroke_data_clean <- filtered_malaysia_demograph %>%
+  mutate(across(
+    c(`Obese (n=2113) – Recurrent Stroke, n (%)`,
+      `Overweight (n=1092) – Recurrent Stroke, n (%)`,
+      `Normal Weight (n=695) – Recurrent Stroke, n (%)`),
+    extract_percent
+  ))
+
+# Filter rows where all 3 are NA
+stroke_data_clean <- stroke_data_clean %>%
+  filter(!is.na(`Obese (n=2113) – Recurrent Stroke, n (%)`) |
+         !is.na(`Overweight (n=1092) – Recurrent Stroke, n (%)`) |
+         !is.na(`Normal Weight (n=695) – Recurrent Stroke, n (%)`))
+
+# Pivot to long format
+df_long <- stroke_data_clean %>%
+  pivot_longer(
+    cols = c(`Obese (n=2113) – Recurrent Stroke, n (%)`,
+             `Overweight (n=1092) – Recurrent Stroke, n (%)`,
+             `Normal Weight (n=695) – Recurrent Stroke, n (%)`),
+    names_to = "Weight_Category",
+    values_to = "Recurrent_Stroke_Percent"
+  )
+
+# Plot
+ggplot(df_long, aes(x = Characteristic, y = Recurrent_Stroke_Percent, fill = Weight_Category)) +
+  geom_bar(stat = "identity", position = position_dodge()) +
+  labs(
+    title = "Recurrent Stroke (%) by Ethnic Groups and Weight Category",
+    x = NULL,
+    y = "Recurrent Stroke (%)"
+  ) +
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))
+  
+```
+
