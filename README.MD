@@ -1,4 +1,3 @@
-README
 Overview
 This project analyzes stroke and related health data using R, focusing on filtering and visualizing specific categories from large datasets of stroke, and diabetes data in Malaysia and the UK. The workflow utilizes the tidyverse and dplyr packages for data manipulation and includes code for filtering datasets based on predefined category lists.
 
